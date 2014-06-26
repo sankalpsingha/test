@@ -82,7 +82,9 @@ describe ContactsController do
   describe 'POST #create' do
     context 'with valid attributs' do
       it 'creates a new value in the DB' do
-          post :create, attributes_for(:contact)
+          expect {
+            post :create, contact: attributes_for(:contact)
+          }.to change(Contact, :count).by(1)
       end
     end
   end

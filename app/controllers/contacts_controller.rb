@@ -18,19 +18,19 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-
-    respond_to do |format|
-      if @contact.save
-        format.html {render :show, notice: 'The contact has been saved.'}
-      end
-    end
-
+    @contact.save
   end
 
   def show
     @contact = Contact.find(params[:id])
   end
 
+
+
+private
+  def contact_params
+    params.require(:contact).permit(:firstname, :lastname, :email)
+  end
 
 
 
