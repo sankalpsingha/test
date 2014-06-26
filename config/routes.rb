@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :contacts, :only => [:show, :index, :new, :edit, :create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
