@@ -86,7 +86,34 @@ describe ContactsController do
             post :create, contact: attributes_for(:contact)
           }.to change(Contact, :count).by(1)
       end
+
+      it 'redirects to show after the contact has been added' do
+        post :create, contact: attributes_for(:contact)
+        expect(response).to redirect_to contact_path(assigns(:contact))
+      end
     end
+  end
+
+
+  describe 'PATCH #update' do
+    before :each do
+      @contact = create(:contact, firstname: 'Sankalp', lastname: 'Singha')
+    end
+
+    context 'with valid attributes' do
+      it 'locates the requested @contact' do
+        patch :update, id: @contact, contact: attributes_for(:contact)
+        expect(assigns(:contact)).to eq(@contact)
+      end
+
+      it 'redirects to the updated contact' do
+        patch :update, id: @contact, contact: attributes_for(:contact)
+        expect(response).to redirect_to @contact
+      end
+
+    end
+
+
   end
 
 end
